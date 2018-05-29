@@ -1,0 +1,779 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RedGate.Shared.SQL</name>
+    </assembly>
+    <members>
+        <member name="T:RedGate.Shared.SQL.DBConnectionInformation">
+            <summary>
+            Contains all the information needed to connect to a SQL Server database.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.DBConnectionInformation.#ctor(System.String,System.String)">
+            <summary>
+            Constructs a new DBConnectionInformation object using integrated authentication (also known as Windows authentication).
+            </summary>
+            <param name="serverName">The server to connect to.</param>
+            <param name="databaseName">The database to connect to.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.DBConnectionInformation.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructs a new DBConnectionInformation object using SQL Server authentication.
+            </summary>
+            <param name="serverName">The server to connect to.</param>
+            <param name="databaseName">The database to connect to.</param>
+            <param name="userName">The user to connect as.</param>
+            <param name="password">The password to use.</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.DBConnectionInformation.ServerName">
+            <summary>
+            The server to connect to.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.DBConnectionInformation.DatabaseName">
+            <summary>
+            The database to connect to.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.DBConnectionInformation.IntegratedSecurity">
+            <summary>
+            If true, integrated authentication will be used. If false, SQL Server authentication will be used.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.DBConnectionInformation.UserName">
+            <summary>
+            The user to connect as if using SQL Server authentication.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.DBConnectionInformation.Password">
+            <summary>
+            The password to use if using SQL Server authentication.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.MostRecentlyUsed.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.MostRecentlyUsed"/> class using the default MRU size.
+            </summary>
+            <param name="registryKey">The root registry key to store the MRU list under.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.MostRecentlyUsed.#ctor(System.String,System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.MostRecentlyUsed"/> class using the specified MRU size.
+            </summary>
+            <param name="registryKey">The root registry key to store the MRU list under.</param>
+            <param name="MRUlength">The maximum number of values to store in the MRU list.</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.MostRecentlyUsed.List">
+            <summary>
+            Retrieves the MRU list.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.MostRecentlyUsed.AddItemToMRUList(System.String)">
+            <summary>
+            Adds the specified string to the MRU list, replacing the oldest value.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.ServerVersion">
+            <summary>
+            Basic SQL Server version encapsulation
+            </summary>
+            <remarks>Do not modify this code as it's compatible with .NET 2</remarks>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.ServerVersion.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/> class with the specified major and minor version
+            </summary>
+            <param name="major">The major version</param>
+            <param name="minor">The major version</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.ServerVersion.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/> class with the specified major, minor and build versions
+            </summary>
+            <param name="major">The major version</param>
+            <param name="minor">The minor version</param>
+            <param name="buildNumber">The build version</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.ServerVersion.Major">
+            <summary>
+            Gets and sets the major number
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.ServerVersion.Minor">
+            <summary>
+            Gets and sets the minor number
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.ServerVersion.BuildNumber">
+            <summary>
+            Gets and sets the build number
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.ServerVersion.ToString">
+            <summary>
+            Returns a <see cref="!:String"/> representing the current <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/>.
+            </summary>
+            <returns>A <see cref="!:String"/> representing the current <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/>.</returns>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLDatabaseStatus">
+            <summary>
+            Represents the state of a SQL Server database
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.None">
+            <summary>
+            Nothing
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.OffLine">
+            <summary>
+            SQL Database is offline
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.Suspect">
+            <summary>
+            SQL Database is suspect
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.NotRecoveredYet">
+            <summary>
+            SQL Database has not been recovered yet
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.InRecovery">
+            <summary>
+            SQL Database in recovery
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.CrashedWhileLoading">
+            <summary>
+            SQL Database Crashed while loading....
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.SystemOwned">
+            <summary>
+            System Database owned by SQL, like master
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLDatabaseStatus.UserOwned">
+            <summary>
+            user Database owned by SQL, like NorthWind
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLDatabase">
+            <summary>
+            A simple encapsulation of a SQL Database 
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLDatabase.#ctor(System.String,System.Int32,System.Int32,System.Byte[],RedGate.Shared.SQL.Server.SQLServerVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/> class
+            </summary>
+            <param name="databaseName">The database name</param>
+            <param name="compatabilityMode">The database compatability mode</param>
+            <param name="sqlStatusValue">The active status flags for this database (see sys.sysdatabases Books Online entry)</param>
+            <param name="sid">System ID of the database creator</param>
+            <param name="version">The hosting SQL Server version</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLDatabase.DatabaseName">
+            <summary>
+            Getter of the name of the database
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLDatabase.CompatabilityMode">
+            <summary>
+            The compatability of database
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLDatabase.Status">
+            <summary>
+            Current Status of the database
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLDatabase.ServerVersion">
+            <summary>
+            Gets the version number of SQL Server.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLDatabase.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representing the current <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representing the current <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/>.</returns>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLDatabases">
+            <summary>
+            A collection of <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/> objects
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLDatabases.GetDatabases">
+            <summary>
+            Gets a list of <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/> names in this collection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLDatabases.Item(System.String)">
+            <summary>
+            Retrieves the first <see cref="T:RedGate.Shared.SQL.Server.SQLDatabase"/> found with the specified <paramref name="databaseName"/>
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLVersion">
+            <summary>
+            Enumeration of known SQL Server versions
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.Unknown">
+            <summary>
+            SQL Server version could not be determined.
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.Min">
+            <summary>
+            Minimum SQL Server version.
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer6">
+            <summary>
+            SQL Server 6.
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer7">
+            <summary>
+            SQL Server 7.
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2000">
+            <summary>
+            SQL Server 2000.
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2005">
+            <summary>
+            SQL Server 2005 
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2008">
+            <summary>
+            SQL Server 2008
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2012">
+            <summary>
+            SQL Server 2012
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2014">
+            <summary>
+            SQL Server 2014
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2016">
+            <summary>
+            SQL Server 2016
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.SqlServer2017">
+            <summary>
+            SQL Server VNext
+            </summary>
+        </member>
+        <member name="F:RedGate.Shared.SQL.Server.SQLVersion.Max">
+            <summary>
+            Maximum SQL Server version.
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLServer">
+            <summary>
+            Represents a SQL Server
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServer.Server">
+            <summary>
+            Gets and sets the SQL Server to connect to
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServer.Username">
+            <summary>
+            Gets and sets the username to use when connecting to the server
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServer.Password">
+            <summary>
+            Gets and sets the password to use when connecting to the server
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServer.IntegratedSecurity">
+            <summary>
+            Gets and sets a value indicating whether to use integrated security when connecting to the server
+            </summary>
+            <remarks>If set to <em>true</em>, the username and password fields will be cleared</remarks>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServer"/> class to use integrated security
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.#ctor(System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServer"/> class
+            </summary>
+            <param name="integratedSecurity">If <em>true</em>, integrated security will be used to connect to the server</param>
+            <param name="server">The server to connect to</param>
+            <param name="username">The username to use when connecting to the server</param>
+            <param name="password">The password to use when connecting to the server</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.DoubleQuotes(System.String)">
+            <summary>
+            For connection strings if both single- and double-quotes are used in
+            a value each occurrence of a quote mark must be doubled to escape it
+            in the value.  This method takes the source string and doubles any
+            quotemarks encountered.
+            </summary>
+            <param name="source">Source string.</param>
+            <returns>String with any quote marks (either single or double) doubled.</returns>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.QuoteThis(System.String)">
+            <summary>
+            Deals with the fact that values in connection strings can contain single- and
+            double-quotes, and also semi-colons.  Will return an appropriately quoted string
+            that can be used without problems as part of a connection string.
+            </summary>
+            <param name="source">Source string.</param>
+            <returns>Appropriately quoted string.</returns>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetConnectionString(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets an appropriate SQL Server connection string that can be used, for example,
+            with ADO.NET.
+            </summary>
+            <remarks>
+            To use integrated security (recommended) you should specify a null username.
+            </remarks>
+            <returns>A suitable SQL Server connection string.</returns>
+            <param name="server">The name of the SQL Server.</param>
+            <param name="database">
+            The name of the database, or <em>null</em> if you do not want to use a default
+            database.
+            </param>
+            <param name="username">
+            The SQL Server user name, or <em>null</em> if you are using integrated
+            security.
+            </param>
+            <param name="password">The password corresponding to SQL Server user name.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetConnectionString(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets an appropriate SQL Server connection string that can be used, for example,
+            with ADO.NET.
+            </summary>
+            <remarks>
+            To use integrated security (recommended), specify a <em>null</em> user
+            name.
+            </remarks>
+            <returns>A suitable SQL Server connection string.</returns>
+            <param name="server">The name of the SQL Server</param>
+            <param name="database">
+            The name of the database, or <em>null</em> if you do not want to use a default
+            database.
+            </param>
+            <param name="username">
+            The SQL Server user name, or <em>null</em> if you are using integrated
+            security.
+            </param>
+            <param name="password">The password corresponding to SQL Server user name.</param>
+            <param name="appName">The application name for a customized application.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetVersion">
+            <summary>
+            Gets the version of the specified SQL Server.
+            </summary>
+            <remarks>
+            If you are using integrated security, specify a <em>null</em> user name and
+            password. You must specify at least a user name to use SQL Server
+            authentication.
+            </remarks>
+            <returns>SQL Server version.</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException">If an error occurs whilst trying to determine the SQL Server version.</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetDatabases">
+            <summary>Returns a list of databases that exist on the SQL Server.</summary>
+            <returns>An array of database names.</returns>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetDatabases(System.Boolean)">
+            <summary>Gets a list of databases given SQL Server information.</summary>
+            <returns>An array of database names.</returns>
+            <param name="forceRefresh"><em>True</em> to force a reload of the database names.</param>
+            <exception cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException">The <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Server"/> name, <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Username"/> or <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Password"/> are invalid</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetDatabasesEx(System.Boolean,System.Int32)">
+            <summary>Gets a list of databases given SQL Server information.</summary>
+            <returns>A <see cref="T:RedGate.Shared.SQL.Server.SQLDatabases"/> object containing the databases found</returns>
+            <param name="forceRefresh"><em>True</em> to force a reload of the database names.</param>
+            <param name="timeout">The timeout (in seconds) to pass to SqlConnection</param>
+            <exception cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException">The <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Server"/> name, <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Username"/> or <see cref="P:RedGate.Shared.SQL.Server.SQLServer.Password"/> are invalid</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetDatabases(System.String,System.Boolean,System.String,System.String,System.Boolean)">
+            <summary>Gets the list of available databases.</summary>
+            <returns>An array of database names.</returns>
+            <param name="server">The name of the SQL Server.</param>
+            <param name="username">
+            The SQL Server user name, or <em>null</em> if you are using integrated
+            security.
+            </param>
+            <param name="password">The password corresponding to SQL Server user name.</param>
+            <param name="forceRefresh"><em>True</em> to force a reload of the database names.</param>
+            <param name="integratedSecurity" />
+            <exception cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException">The <paramref name="server"/>, <paramref name="username"/> or <paramref name="password"/> are invalid</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServer.GetDatabasesEx(System.String,System.Boolean,System.String,System.String,System.Boolean)">
+            <summary>Gets a list of the available databases.</summary>
+            <returns>A <see cref="T:RedGate.Shared.SQL.Server.SQLDatabases"/> object containing the databases found</returns>
+            <param name="server">The name of the SQL Server.</param>
+            <param name="username">
+            The SQL Server user name, or <em>null</em> if you are using integrated
+            security.
+            </param>
+            <param name="password">The password corresponding to SQL Server user name.</param>
+            <param name="forceRefresh"><em>True</em> to force a reload of the database names.</param>
+            <param name="integratedSecurity"><em>True</em> to use integrated security</param>
+            <exception cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException">The <paramref name="server"/>, <paramref name="username"/> or <paramref name="password"/> are invalid</exception>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLServerDatabaseVersion">
+            <summary>
+            SQL database version encapsulation
+            </summary>
+            <remarks>This also stores the hosting SQL Server version</remarks>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDatabaseVersion.#ctor(RedGate.Shared.SQL.Server.SQLServerVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDatabaseVersion"/> class using the specified <see cref="T:RedGate.Shared.SQL.Server.SQLServerVersion"/>
+            </summary>
+            <param name="src">The hosted SQL Server version</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerDatabaseVersion.CompatabilityLevel">
+            <summary>
+            Gets and sets the database compatability level
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException">
+            <summary>
+            Exception that can be generated when locating SQL Servers/SQL Instances.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class with a specified server and database name.
+            </summary>
+            <param name="server">
+            Name of SQL Server instance for which exception occurred.
+            <strong>null</strong> is an acceptable value.
+            </param>
+            <param name="database">
+            Name of database for which exception occurred. <strong>null</strong>
+            is an acceptable value.
+            </param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class with a specified error message.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class
+            with a specified error message, server, and database name.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <param name="server">
+            Name of SQL Server instance for which exception occurred.
+            <strong>null</strong> is an acceptable value.
+            </param>
+            <param name="database">
+            Name of database for which exception occurred. <strong>null</strong>
+            is an acceptable value.
+            </param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class with a specified error message
+            and a reference to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class with a specified error message, 
+            reference to the inner exception that is the cause of this exception, server, and database name.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+            <param name="server">
+            Name of SQL Server instance for which exception occurred.
+            <strong>null</strong> is an acceptable value.
+            </param>
+            <param name="database">
+            Name of database for which exception occurred. <strong>null</strong>
+            is an acceptable value.
+            </param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerDiscoveryException"/> class with serialized data. 
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serializes the exception.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.Server">
+            <summary>
+            Name of SQL Server instance for which exception occurred, if any.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerDiscoveryException.Database">
+            <summary>
+            Name of database for which exception occurred, if any.
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLServerInstances">
+            <summary>
+            Get a list of SQL server instances from the network.	
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerInstances.Init">
+            <summary>
+            Initiate the background thread to gets the available SQL Server instances from the network
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerInstances.SSMS2005Folder">
+            <summary>
+            Get the folder for Microsoft Management Studio.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerInstances.GetAvailable(System.Boolean)">
+            <summary>
+            Gets a list of available SQL Server instances
+            </summary>
+            <param name="forceRefresh">If <em>true</em>, the list will be refreshed from the network</param>
+            <returns>An array of SQL Server instances found</returns>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.NetServerApi32">
+            <summary>
+            Class to locate servers on a local network/domain
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.NetServerApi32.SV_101_TYPES">
+            <summary />
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.NetServerApi32.SERVER_INFO_101">
+            <summary />
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.NetServerApi32.PLATFORM_ID">
+            <summary />
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="T:RedGate.Shared.SQL.Server.SQLServerVersion">
+            <summary>
+            SQL Server version encapsulation
+            </summary>
+            <exclude/>
+            <excludetoc/>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerVersion.#ctor(RedGate.Shared.SQL.Server.ServerVersion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/> class using the values in the specified <see cref="T:RedGate.Shared.SQL.Server.SQLServerVersion"/> object and an empty <see cref="P:RedGate.Shared.SQL.Server.SQLServerVersion.DecriptionGuid"/>
+            </summary>
+            <param name="src">The source <see cref="T:RedGate.Shared.SQL.Server.ServerVersion"/></param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerVersion.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerVersion"/> class using the specified major, minor and build versions and an empty <see cref="P:RedGate.Shared.SQL.Server.SQLServerVersion.DecriptionGuid"/>
+            </summary>
+            <param name="major"></param>
+            <param name="minor"></param>
+            <param name="buildNumber"></param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.Server.SQLServerVersion.CreateSQLServerVersion(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:RedGate.Shared.SQL.Server.SQLServerVersion"/> class from the specified string
+            </summary>
+            <param name="versionString">A version string in the format xx.yy.zzzz</param>
+            <returns>A <see cref="T:RedGate.Shared.SQL.Server.SQLServerVersion"/> object representing the version, or a zero version if the string is in an invalid format</returns>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerVersion.DecriptionGuid">
+            <summary>
+            Gets and sets the decryption GUID to use for this server
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.Server.SQLServerVersion.CanDecrypt">
+            <summary>
+            <em>True</em> if the decryption guid is not empty
+            </summary>
+        </member>
+        <member name="T:RedGate.Shared.SQL.SmartAssemblyAttributes.StayPublicAttribute">
+            <summary>
+            When SmartAssembly merges public members of an assembly, they may become internal. This can stop other applications from post-processing the obfuscated code.
+            Apply the StayPublicAttribute to ensure that the member remains public after obfuscation.
+            To reference the member by its name in the obfuscated dll you may also need to use the <see cref="T:RedGate.Shared.SQL.SmartAssemblyAttributes.DoNotObfuscateAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.SqlConnectionProperties.#ctor">
+            <summary>Constructor for the ConnectionProperties class.</summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.SqlConnectionProperties.#ctor(System.String,System.String)">
+            <summary>Constructor for integrated security.</summary>
+            <param name="serverName">The SQL Server name.</param>
+            <param name="databaseName">The database name.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.SqlConnectionProperties.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>Constructor for SQL security.</summary>
+            <param name="serverName">The SQL Server name.</param>
+            <param name="databaseName">The database name.</param>
+            <param name="userName">The user name to use to connect to the SQL Server.</param>
+            <param name="password">The password to use to connect to the SQL Server.</param>
+        </member>
+        <member name="P:RedGate.Shared.SQL.SqlConnectionProperties.ServerName">
+            <summary>The name of the SQL Server to connect to.</summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.SqlConnectionProperties.DatabaseName">
+            <summary>The name of the database to connect to.</summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.SqlConnectionProperties.IntegratedSecurity">
+            <summary>
+                True to use integrated authentication, false for SQL Server
+                authentication.
+            </summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.SqlConnectionProperties.UserName">
+            <summary>The user name to use when connecting to the SQL Server.</summary>
+        </member>
+        <member name="P:RedGate.Shared.SQL.SqlConnectionProperties.Password">
+            <summary>The password to use when connecting to the SQL Server.</summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.SqlConnectionProperties.ToDBConnectionInformation">
+            <summary>
+                Returns a DBConnectionInformation object representing the current connection properties.
+            </summary>
+            <returns>A DBConnectionInformation object with the same connection information as this object.</returns>
+            <remarks>
+                This can be passed to <see cref="!:BlockExecutor.ExecuteBlock(ExecutionBlock,DBConnectionInformation)" />
+                to use these connection properties to run a synchronization script on the database represented by
+                the current ConnectionProperties object.
+            </remarks>
+        </member>
+        <member name="M:RedGate.Shared.SQL.SqlExceptionUtils.IsFailureConnectingToDatabase(System.Data.SqlClient.SqlException)">
+            <remarks>
+            There are possibly a few obscure cases that we don't handle properly, see:
+                  (1) ^/CurrentProjects/SharedDbaTools/Trunk/RedGate.DbaTools.Sql/Server/SqlErrorNumber.cs
+              and (2) ^/CurrentProjects/SQLResponse/Trunk/Source/Common/Utilities/Sql/SqlMessageId.cs
+            </remarks>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.CheckDisposed">
+            <summary>
+            Throws <see cref="T:System.ObjectDisposedException"/> if this instance has been disposed.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">This instance has been disposed.</exception>
+        </member>
+        <member name="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath">
+            <summary>
+            Returns the default temporary directory used for all temporary files.
+            </summary>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.GenerateName(System.String,System.String)">
+            <summary>
+            Generates a new file or directory name with the specified prefix and extension.
+            This will be unmanaged by any <see cref="T:RedGate.Shared.SQL.TemporaryFileManager"/> instance.
+            </summary>
+            <param name="prefix">The prefix to apply to the name.</param>
+            <param name="extension">The extension to apply to the name, without the dot. Can be null or empty for no extension.</param>
+            <returns>A new temporary file or directory name.</returns>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.TemporaryFileManager"/> class with the specified prefix.
+            </summary>
+            <param name="prefix">The prefix to apply to all temporary file and directory names.</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RedGate.Shared.SQL.TemporaryFileManager"/> class with the specified prefix
+            and default extension.
+            </summary>
+            <param name="prefix">The prefix to apply to all temporary file and directory names.</param>
+            <param name="defaultExtension">The default extension for all new temporary files (can be overridden per-file).</param>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.GenerateUniqueFilePath(System.String,System.String)">
+            <summary>
+            Generates a unique filename within the specified subdirectory of <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/>.
+            </summary>
+            <param name="parentDir">The subdirectory under which to create the file, relative to the <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/>.</param>
+            <param name="extension">The extension to apply to the filename, without the dot.</param>
+            <returns>The full path to the temporary file.</returns>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.GetNewTempFile">
+            <summary>
+            Creates a new temporary file in <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/> that will be deleted on disposal of the current instance.
+            </summary>
+            <returns>The full path of the temporary file.</returns>
+            <exception cref="T:System.UnauthorizedAccessException">You do not have permissions to create a file on <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/>.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.GetNewTempFile(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Returns the path to a new temporary file with the specified extension
+            in the specified subdirectory of <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/>.
+            </summary>
+            <param name="subDir">The subdirectory to create the temporary file under.</param>
+            <param name="extension">The extension to apply to the file.</param>
+            <param name="createFile">If <em>true</em>, the file is also created.</param>
+            <param name="deleteOnDispose">If <em>true</em>, the file will be deleted on disposal of this instance if it exists.</param>
+            <returns>The path of the temporary file.</returns>
+            <exception cref="T:System.UnauthorizedAccessException">You do not have permissions to create a file on <see cref="P:RedGate.Shared.SQL.TemporaryFileManager.DefaultTempPath"/>.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The specified subdirectory <paramref name="subDir"/> does not exist.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+        </member>
+        <member name="M:RedGate.Shared.SQL.TemporaryFileManager.ForceDelete(System.String)">
+            <summary>
+            Delete a directory and it's contents, if there are any readonly files or directories these are set to normal and removed
+            </summary>
+            <param name="directoryPath">the full path to the directory to be recursively removed</param>
+            <returns>true if the directory was deleted, false otherwise</returns>
+        </member>
+    </members>
+</doc>

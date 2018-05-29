@@ -1,0 +1,1147 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RedGate.SQLCompare.Engine.UIProject</name>
+    </assembly>
+    <members>
+        <member name="T:RedGate.SQLCompare.Engine.AuthenticationType">
+            <summary>
+            The type of authentication to use when connecting to SQL Server.
+            *Password authentication types additionally require a username and password to be specified
+            </summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource">
+            <summary>
+            Representation of a data source that takes its data from a backup of a database.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.#ctor">
+            <summary>Constructs this object with an empty files list.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},RedGate.BackupReaderInterfaces.IBackupSet)">
+            <summary>Constructs this object using the specified files.</summary>
+            <param name="files">The files from which to construct this data source</param>
+            <param name="passwords">
+            The SQL Backup passwords (one for each file) that are used to access the data source
+            </param>
+            <param name="backupSet">The backup set with which to construct this data source</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Files">
+            <summary>
+            The files that should be used as the source for the backup for this data source.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Passwords">
+            <summary>
+            The SQL Backup passwords (one for each file) that are used to access the data source.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IgnoreWrongPasswords">
+            <summary>Tells the backup reader to ignore files with incorrect passwords</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IsDifferentSource(RedGate.SQLCompare.Engine.IDataSource)">
+            <summary>Overridden. Compares the data source with a specified data source.</summary>
+            <returns><em>true</em> if the data sources are different.</returns>
+            <param name="newDataSource">The data source to compare.</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IsCaseSensitive">
+            <summary>Whether the underlying database is case sensitive or not!</summary>
+            <returns>true if case-sensitive, false otherwise</returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Clone">
+            <summary>Overridden. Clones the data source.</summary>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>
+            Deserializes this data source. Note that the database information settings are serialized along with the data
+            source.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>
+            Serializes this data source. Note that the database information settings are serialized along with the data
+            source.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.ServerName">
+            <summary>Overridden. Gets the name of the SQL Server of the backup set.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.DatabaseName">
+            <summary>Overridden. Gets the database name of the backup set.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IsWriteable">
+            <summary>
+            Overridden. The data source cannot be written to. This property always returns
+            <em>false.</em>
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.Version">
+            <summary>
+            Overridden. Gets the current serialized version number of BackupDatabaseSource.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.BackupSet">
+            <summary>
+            Gets or sets the BackupSet to be used in the backup file. If this is null the latest backup set will be used.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.LastServerName">
+            <summary>Gets or sets the name of the SQL Server for the last backup set.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.LastDatabaseName">
+            <summary>Gets or sets the name of the database for the last backup set.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IsValid">
+            <summary>
+            True if this snapshot represents a valid data source that can be used in comparison. If false, then there is
+            a problem with the snapshot file - for example, it could not be found or is in the wrong format.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromBackup.BackupDatabaseSource.IsPasswordRequired(System.Collections.Generic.IList{System.String})">
+            <summary>Returns true if the backup files need a password to be read, false otherwise.</summary>
+            <param name="filePaths">A list of the files to open</param>
+            <returns>true if the backup files need a password to be read, false otherwise</returns>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ColumnPairReference">
+            <summary>A reference to a column pair</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ColumnPairReference.Col1">
+            <summary>A column reference to the first column</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ColumnPairReference.Col2">
+            <summary>A column reference to the second column</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ColumnPairReference.#ctor(RedGate.SQLCompare.Engine.ColumnReference,RedGate.SQLCompare.Engine.ColumnReference)">
+            <summary>Creates a new reference to two columns</summary>
+            <param name="one">A reference to the first column</param>
+            <param name="two">A reference to the second column</param>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ColumnReference">
+            <summary>A reference to a column</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ColumnReference.TableName">
+            <summary>The tables name</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ColumnReference.ColumnName">
+            <summary>The columns name</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ColumnReference.#ctor(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.ViewTableSuperClass},RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.IField})">
+            <summary>Creates a new column reference</summary>
+            <param name="tm">The table mapping of the table to reference</param>
+            <param name="fm">The field mapping of the field to reference</param>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ComparisonOptions">
+            <summary>Options used when comparing databases.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.Default">
+            <summary>None.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.None">
+            <summary>None.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.TrimTrailingSpaces">
+            <summary>
+            If two columns of data differ only by the number of spaces at the end of the string, SQL Data Compare
+            considers the data to be identical. The trailing spaces are not included in the synchronization script. This
+            option does not apply to CLR or variant columns.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.ForceBinaryCollation">
+            <summary>
+            For all string data types, forces binary collation irrespective of column collation, resulting in a
+            case-sensitive comparison. When this option is selected and the comparison key is a string, this may result
+            in slower performance because the indexes are not used.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.UseChecksumComparison">
+            <summary>
+            When you are comparing tables or views with a large volume of data that changes infrequently, if you set this
+            option, a checksum is used to compare the data. If the checksums differ, the data is compared; if the
+            checksums are the same, the data is not compared. On SQL Server 2000 the connected user must be a member of
+            the db_owner role or the system administrator role. This option applies only to SQL Server 2000 or later.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.CompressTemporaryFiles">
+            <summary>
+            Compresses the temporary files that SQL Data Compare generates while performing the comparison. This reduces
+            the possibility of running out of temporary disk space when comparing very large databases. When you select
+            this option, you will not be able to sort the results of the comparison.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ComparisonOptions.TreatEmptyStringAsNull">
+            <summary>Treat an empty string and null as equal for varchar, nvarchar</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.DataCompareGroupingStyle">
+            <summary>An enumeration of the possible grouping styles supported by the main grid.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.DataCompareGroupingStyle.Comparison">
+            <summary>
+            Indicates that the results should be grouped by the result of the comparison (this is the default style)
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.DataCompareGroupingStyle.Flat">
+            <summary>Indicates that the results should not be grouped at all</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.DataCompareUserActions.RemoveFunction">
+            <summary>Function used to confirm duplication</summary>
+            <param name="ste">Item to check for being a duplicate of the new value</param>
+            <returns>true if this is a duplication to be removed, false otherwise</returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.DataCompareUserActions.AddAction(System.Collections.Generic.IList{RedGate.SQLCompare.Engine.SelectTableEvent},RedGate.SQLCompare.Engine.EngineDataCompareOptions,RedGate.SQLCompare.Engine.SelectTableEvent)">
+            <summary>
+            Used to add a user action. This will only add actions that are necessary removing all duplicates or
+            unnecessary actions ( for example a deselect table followed by a select table ). This is needed as I now
+            report on failed user actions in the UI and I only want to keep what's sensible.
+            </summary>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.EngineDataCompareOptions">
+            <summary>
+            Class containing the three options enumerations for the three stages in data comparison.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.#ctor">
+            <summary>
+            Creates an options class and sets all of the options enumerations to
+            <em>default</em>.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.IsOptionSet(RedGate.SQLCompare.Engine.ComparisonOptions)">
+            <summary></summary>
+            <param name="option">A single value from ComparisonOptions enum.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.#ctor(RedGate.SQLCompare.Engine.MappingOptions,RedGate.SQLCompare.Engine.ComparisonOptions,RedGate.SQLCompare.Engine.SqlOptions,System.String)">
+            <summary>
+            Creates an options class and sets all of the options enumerations to the parameters of the constructor.
+            </summary>
+            <param name="mappingOptions">Options to use when mapping the databases.</param>
+            <param name="comparisonOptions">Options to use when comparing the databases.</param>
+            <param name="sqlOptions">Options to use when generating the synchronization SQL script.</param>
+            <param name="productInfo">A string describing the product such as "SQL Data Compare version 1.2.3"</param>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.EngineDataCompareOptions.ProductInfoDefaultValue">
+            <summary>
+            The current version of the SQL Data Compare Engine, to be inserted in the comment header of a deployment script
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.EngineDataCompareOptions.MappingOptions">
+            <summary>Options that must be set before the databases are mapped.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.GetAvailableMappingOptions">
+            <summary>Returns a list of available options for mapping databases.</summary>
+            <returns>A list of options.</returns>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.EngineDataCompareOptions.ComparisonOptions">
+            <summary>Options that must be set before the databases are compared.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.GetAvailableComparisonOptions">
+            <summary>Returns a list of available options for comparing databases.</summary>
+            <returns>A list of options.</returns>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.EngineDataCompareOptions.SqlOptions">
+            <summary>Options that must be set before the SQL script is generated.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.GetAvailableSqlOptions">
+            <summary>
+            Returns a list of available options for generating the synchronization SQL script.
+            </summary>
+            <returns>A list of options.</returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Gets serialization information with all of the data needed to recreate an instance of the
+            <see cref="T:RedGate.SQLCompare.Engine.EngineDataCompareOptions" /> class.
+            </summary>
+            <param name="info">The object to be populated with serialization information.</param>
+            <param name="context">The destination context of the serialization.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.EngineDataCompareOptions.System#ICloneable#Clone">
+            <summary>Creates a shallow copy of the options.</summary>
+            <returns>A shallow copy of the options.</returns>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource">
+            <summary>
+            Representation of a data source that will take its data from a series of scripts in a folder.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.#ctor">
+            <summary>Constructs this object with an empty path for the folder.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.#ctor(RedGate.SQLCompare.Engine.ReadFromFolder.ScriptDatabaseInformation)">
+            <summary>
+            Constructs this object with an empty path for the folder and specific settings for the folder information.
+            </summary>
+            <param name="information">The database information. This should not be null.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.#ctor(System.String)">
+            <summary>
+            Constructs this object using the specified folder. If a SqlCompareDatabaseInfo.xml file exists in the
+            specified directory, then this will be parsed to fill in the values in the Information object.
+            </summary>
+            <param name="folder">The folder to construct this datasource from</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.#ctor(System.String,RedGate.SQLCompare.Engine.ReadFromFolder.ScriptDatabaseInformation)">
+            <summary>
+            Constructs a data source that will read from a specific folder, and optionally override the server
+            information.
+            </summary>
+            <param name="folder">The folder to read scripts from</param>
+            <param name="information">
+            The database information. If null, then the script directory will be checked for a settings XML file.
+            </param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Path">
+            <summary>
+            The path for the folder to be used as the source for the scripts making up this data source.
+            </summary>
+            <remarks>
+            Call RefreshFromPath after setting this value in order to cause this object to update itself with information
+            from the specified path. Refreshing can be a lengthy process if the path refers to a network location.
+            </remarks>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.DatabaseInformation">
+            <summary>
+            Extra information that would normally be stored in the database that needs to be retrieved from an
+            alternative source. The preferred method is the SqlCompareDatabaseInfo.xml script stored in the folder.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.IsDifferentSource(RedGate.SQLCompare.Engine.IDataSource)">
+            <summary>Compares the data source with a specified data source.</summary>
+            <returns><em>true</em> if the data sources are different.</returns>
+            <param name="newDataSource">The data source to compare.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Clone">
+            <summary>Clones the data source.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>
+            Deserializes this data source. Note that the database information settings are serialized with the data
+            source.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>
+            Serializes this data source. Note that the database information settings are serialized with the data source.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.ServerName">
+            <summary>Gets or sets the name of the SQL Server.</summary>
+            <remarks>
+            Scripts folders are not associated with any SQL Server, so this value is not meaningful. By default it is
+            'Scripts', but it can be changed.
+            </remarks>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.DatabaseName">
+            <summary>Gets or sets the name of the SQL Server database.</summary>
+            <remarks>
+            Scripts folders are not associated with any SQL Server, so this value is not meaningful. By default it is
+            derived from the path name.
+            </remarks>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.IsWriteable">
+            <summary>The data source can be written to.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Version">
+            <summary>Gets the current serialized version number of the snapshot.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.Errors">
+            <summary>
+            Returns the errors that occurred last time the database metadata for this data source was loaded.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.RefreshFromPath">
+            <summary>
+            Refreshes the database information for this folder, and sets the Errors property.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ReadFromFolder.FolderDataSource.RefreshDatabaseInformation">
+            <summary>Refreshes the database information for this folder</summary>
+            <returns>
+            A set of flags indicating any errors that occurred during deserialization. The information object is left
+            untouched if the file could not be read successfully.
+            </returns>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.GroupingStyle">
+            <summary>An enumeration of the possible grouping styles supported by the main grid.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.GroupingStyle.Comparison">
+            <summary>
+            Indicates that the results should be grouped by the result of the comparison (this is the default style)
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.GroupingStyle.ObjectType">
+            <summary>Indicates that the results should be grouped by the type of object involved</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.GroupingStyle.Flat">
+            <summary>Indicates that the results should not be grouped at all</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.KeyReference">
+            <summary>A reference to a Key</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.KeyReference.TableName">
+            <summary>The table name</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.KeyReference.IndexName">
+            <summary>The name of the index</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.KeyReference.#ctor(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.ViewTableSuperClass},RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.RelationalIndex})">
+            <summary>Creates a reference to a key</summary>
+            <param name="tm">The table mapping</param>
+            <param name="im">The index mapping</param>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.LiveDatabaseSource">
+            <summary>A standard SQL Server database.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.IsWriteable">
+            <summary>The data source can be written to.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.DatabaseName">
+            <summary>Gets or sets the name of the database.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.IntegratedSecurity">
+            <summary>Specifies whether Windows Integrated security or SQL authentication is used.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.Password">
+            <summary>Gets or sets the password for the SQL user.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.SavePassword">
+            <summary>
+            Specifies whether the password should be written to disk when serializing the project.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.ServerName">
+            <summary>Gets or sets the name of the SQL Server.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.UserName">
+            <summary>Gets or sets the SQL Server user name with which to connect to the SQL Server.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Deserializes data.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Serializes the specified object.</summary>
+            <param name="obj">The object to serialize.</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.LiveDatabaseSource.Version">
+            <summary>Gets the current serialized version number of LiveDatabaseSource.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.IsDifferentSource(RedGate.SQLCompare.Engine.IDataSource)">
+            <summary>Compares the data source with a specified data source.</summary>
+            <returns><em>true</em> if the data sources are different.</returns>
+            <param name="comparisonDataSource">The data source to compare.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.Clone">
+            <summary>Clones the data source.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.ToConnectionProperties">
+            <summary>Returns the ConnectionProperties.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.LiveDatabaseSource.ToConnectionString">
+            <summary>
+            Should be equivalent to ToConnectionProperties().ConnectionString, but this one will support more authentication types in the future
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>This method deserializes the object from the current serialization</summary>
+            <param name="versionId">The version of the serialized data</param>
+            <param name="formatter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Serialize up you data. (Nb the version number has already been added in)</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Encrypted">
+            <summary>Returns whether the BackupSet is encrypted or not.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.IsIncomplete">
+            <summary>Returns whether the BackupSet is incomplete or not.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.CanHandle">
+            <summary>
+            Gets whether SQL Backup Reader is able to handle this BackupSet. This should be used by the user interface to
+            determine whether the user is allowed to select this backup set.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.DatabaseName">
+            <summary>The original database name</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.ServerName">
+            <summary>The server from which the database was backed up</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.StartDate">
+            <summary>The date and time the backup began</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.EndDate">
+            <summary>The date and time the backup completed</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.BackupType">
+            <summary>The type of backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Version">
+            <summary>This is the current latest version of your serialized data.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.FirstLsn">
+            <summary>First log sequence number of this backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.LastLsn">
+            <summary>Last log sequence number of this backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.CheckpointLsn">
+            <summary>Log sequence number of most recent checkpoint of this backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.FullBackupLsn">
+            <summary>Log sequence number of the full backup associated with this backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Size">
+            <summary>Size (in bytes) of this backup</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UIProject.UIProject.ProjectBackupSet.Name">
+            <summary>The name of the backupset, if one is set.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.ObjectHasher.MD5">
+            <summary>Summary description for MD5.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.ROTATE_LEFT(System.UInt32,System.Byte)">
+            <summary>rotates x left n bits.</summary>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.FF(System.UInt32@,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Byte,System.UInt32)">
+            FF, GG, HH, and II transformations 
+            for rounds 1, 2, 3, and 4.
+            Rotation is separate from addition to prevent recomputation.
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ObjectHasher.MD5.state">
+            <summary>state (ABCD)</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ObjectHasher.MD5.count">
+            <summary>number of bits, modulo 2^64 (lsb first)</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.ObjectHasher.MD5.buffer">
+            <summary>input buffer</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.Initialize">
+            <summary>MD5 initialization. Begins an MD5 operation, writing a new context.</summary>
+            <remarks>The RFC named it "MD5Init"</remarks>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            MD5 block update operation. Continues an MD5 message-digest operation, processing another message block, and
+            updating the context.
+            </summary>
+            <remarks>The RFC Named it MD5Update</remarks>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.HashFinal">
+            <summary>
+            MD5 finalization. Ends an MD5 message-digest operation, writing the the message digest and zeroizing the
+            context.
+            </summary>
+            <returns>message digest</returns>
+            <remarks>The RFC named it MD5Final</remarks>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.Transform(System.Byte[],System.Int32)">
+            <summary>MD5 basic transformation. Transforms state based on 64 bytes block.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.Encode(System.Byte[],System.Int32,System.UInt32[],System.Int32,System.Int32)">
+            <summary>Encodes input (uint) into output (byte). Assumes len is multiple of 4.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ObjectHasher.MD5.Decode(System.UInt32[],System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>Decodes input (byte) into output (uint). Assumes len is a multiple of 4.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.OwnerPairReference">
+            <summary>An OwnerPairReference.</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.OwnerPairReference.Owner1">
+            <summary></summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.OwnerPairReference.Owner2">
+            <summary></summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.OwnerPairReference.#ctor(System.String,System.String)">
+            <summary></summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.Project">
+            <summary>A SQL Compare project.</summary>
+            <remarks>
+            Use this class to load projects generated by SQL Compare, or to save projects for SQL Compare. Note that a
+            project contains only connection information. It does not contain information about database schemas.
+            </remarks>
+            <example>
+            This example shows how to save and load a project.
+            <code lang="CS">
+            Project project1=new Project();
+             
+            //by default DataSource1/DataSource2 are created as a LiveDatabaseSources with
+            //the server name set to "(local)".
+            project1.DataSource1.DatabaseName = "WidgetProduction";
+            project1.DataSource2.DatabaseName = "WidgetStaging";
+             
+             
+            //this project can now be opened up in SQL Compare
+            project1.SaveToDisk(@"c:\A sample project.scp");
+             
+            //load the project from disk
+            Project project2=Project.LoadFromDisk(@"c:\A sample project.scp");
+             
+            Console.WriteLine(project2.FileName);
+                </code>
+            <code lang="vb">
+            Dim project1 As New Project()
+             
+            'by default DataSource1/DataSource2 are created as a LiveDatabaseSources with
+            'the server name set to "(local)".
+            project1.DataSource1.DatabaseName = "WidgetProduction"
+            project1.DataSource2.DatabaseName = "WidgetStaging"
+             
+            'this project can now be opened up in SQL Compare
+            project1.SaveToDisk("c:\A sample project.scp")
+             
+            'load the project from disk
+            Dim project2 As Project = Project.LoadFromDisk("c:\A sample project.scp")
+             
+            Console.WriteLine(project2.FileName)
+                </code>
+            </example>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.Version">
+            <summary>The current project version. Used for serialization.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Support for serialization.</summary>
+            <param name="formatter">The formatter to write to.</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.FileName">
+            <summary>The file name of the project.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.LoadFromDisk(System.String)">
+            <summary>Loads a project from disk.</summary>
+            <returns>A Project object.</returns>
+            <param name="fileName">The file name of the project.</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.Filter">
+            <summary>Gets or sets SelectedFilters.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.SaveToDisk(System.String)">
+            <summary>Save the project to disk</summary>
+            <param name="fileName">The file name</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.DataSource1">
+            <summary>The connection properties for the first data source.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.DataSource2">
+            <summary>The connection properties for the second data source.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.CreateNew">
+            <summary>Creates a new blank project.</summary>
+            <returns>A new instance of class Project.</returns>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.ToString">
+            <summary>Converts an instance of Project to a string.</summary>
+            <returns>A string representation of the project details.</returns>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.LastCompared">
+            <summary>The time at which the project was last compared.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.LastModified">
+            <summary>The time at which the project was last compared.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.ComparisonOptions">
+            <summary>Options used when running a comparison or synchronization on the project.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.Direction">
+            <summary>
+            The direction in which changes are migrated when a synchronization is run on the project.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.ChangeSynchronizationDirection">
+            <summary>Changes the direction in which changes are to be migrated.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.UserNote">
+            <summary>Gets or sets the user notes.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.ProblemsLoadingProject">
+            <summary>
+            If part of a project can't be read, <see cref="M:RedGate.SQLCompare.Engine.Project.LoadFromDisk(System.String)" /> will warn about the missing values here.
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.SelectedSyncObjects">
+            <summary>Gets or sets the ObjectSelectionUserActions.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.DCOptions">
+            <summary>Options used when running a comparison or synchronization on the project.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.SelectTableActions">
+            <summary>Gets or sets the OwnerMappingUserActions.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.Project.SessionSettings">
+            <summary>The session settings used in the project comparison.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.Project.DoClone(RedGate.SQLCompare.Engine.Project)">
+            <summary>Clones the current Project</summary>
+            <returns>The cloned project</returns>
+            <exclude />
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ProjectBackupOptions.CachedSqbLicenseType">
+            <summary>Gets the type of the SQL Backup license on the target server</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.ProjectBackupOptions.CachedSqbVersion">
+            <summary>
+            Gets the installed version of SQL Backup on the target server. Returns zero if SQL Backup isn't installed.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.ProjectBackupOptions.UpdateFromDataSource(RedGate.SQLCompare.Engine.Deployment.IServerFactory,RedGate.SQLCompare.Engine.IDataSource)">
+            <summary>
+            Updates this data sources name and cached values from another datasource
+            </summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SelectTableEvent">
+            <summary>Struct representing a user action</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEvent.action">
+            <summary>An enum denoting which action was performed</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEvent.data">
+            <summary>Some data about the action</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SelectTableEvent.#ctor(RedGate.SQLCompare.Engine.SelectTableEventAction,System.Object)">
+            <summary>Creates a new select table event</summary>
+            <param name="action">The action performed</param>
+            <param name="data">The assosciated data for that action</param>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SelectTableEvent.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Serialization support</summary>
+            <param name="nVersionId">The version we are deserializng</param>
+            <param name="obj">The assosciated formatter</param>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SelectTableEvent.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Serialization support</summary>
+            <param name="obj">THe formatter to write out to</param>
+            <exclude />
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SelectTableEvent.Version">
+            <summary>For serialization. The current version</summary>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SelectTableEventAction">
+            <summary>An enum stating which action the user made</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.None">
+            <summary>Not used</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SelectAll">
+            <summary>Enum value used to represent a select all event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SelectItem">
+            <summary>Enum value used to represent a select item event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.DeselectAll">
+            <summary>Enum value used to represent a deselect all event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.DeselectItem">
+            <summary>Enum value used to represent a deselect item event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SelectColumn">
+            <summary>Enum value used to represent a select column event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.DeselectColumn">
+            <summary>Enum value used to represent a deselect column event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.UseKey">
+            <summary>Enum value used to represent a comparison key selection event</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.UseCustomKey">
+            <summary>Enum value used to represent the user choosing to use a custom key</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SelectColumnAsKey">
+            <summary>Enum value used to represent the user choosing a column for thier key</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.DeselectColumnAsKey">
+            <summary>
+            Enum value used to represent the user choosing not to use a column for their key
+            </summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SetLeftWhereClause">
+            <summary>Enum value used to represent the user setting a left where caluse</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.SetRightWhereClause">
+            <summary>Enum value used to represent the user setting a right where caluse</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.MapTables">
+            <summary>Enum value used to represent the user mapping two tables</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.UnmapTables">
+            <summary>Enum value used to represent the user unmapping two tables</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.MapColumn">
+            <summary>Enum value used to represent the user mapping two columns</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.UnmapColumns">
+            <summary>Enum value used to represent the user unmapping two columns</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.MapOwners">
+            <summary>Enum value used to represent the user mapping two owners</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SelectTableEventAction.UnmapOwners">
+            <summary>Enum value used to represent the user unmapping two owners</summary>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SessionSettings">
+            <summary>Settings for comparing objects.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.IncludeIdenticalRecords">
+            <summary>Include records that are the same in both databases.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.IncludeDifferentRecords">
+            <summary>Include records that exist in both databases and are different.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.IncludeRecordsInOne">
+            <summary>Include records that exist in the first database, but not the second.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.IncludeRecordsInTwo">
+            <summary>Include records that exist in the second database, but not the first.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.UseDotNETSQLDataReader">
+            <summary> Use DotNET SQLDataReader</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.UseLargeBlobSQLDataReader">
+            <summary> Use LargeBlob DataReader</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SessionSettings.Default">
+            <summary>The default setting.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SnapshotSource">
+            <summary>A SQL Server database encapsulated within a snapshot.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.UpdateFromSnapshot">
+            <summary>Refreshes the properties of this datasource from the</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.IsWriteable">
+            <summary>The data source <strong>cannot</strong> be written to.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.DatabaseName">
+            <summary>Gets or sets the name of the database.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.ServerName">
+            <summary>Gets or sets the name of the SQL Server.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.CreationTime">
+            <summary>
+            Gets the creation time of the snapshot file (the time at which the file was last written to).
+            </summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.FileName">
+            <summary>Gets or sets the snapshot file name.</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.IsValid">
+            <summary>
+            True if this snapshot represents a valid data source that can be used in comparison. If false, then there is
+            a problem with the snapshot file - for example, it could not be found or is in the wrong format.
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.#ctor">
+            <summary>Constructs a snapshot.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.#ctor(System.String)">
+            <summary>Constructs the snapshot file name.</summary>
+            <param name="snapshotFileName">The file name of the snapshot.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.IsDifferentSource(RedGate.SQLCompare.Engine.IDataSource)">
+            <summary>Compares the data source with a specified data source.</summary>
+            <returns><em>true</em> if the data sources are different.</returns>
+            <param name="comparisonDataSource">The data source to compare.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.Clone">
+            <summary>Clones the data source.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.Deserialize(System.Int32,RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Deserializes data.</summary>
+            <returns><em>true</em> if the data can be deserialized.</returns>
+            <param name="versionId">The serialization version.</param>
+            <param name="formatter">The ISerializeFormatter for deserialization.</param>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SnapshotSource.Serialize(RedGate.Legacy.Serialization.ISerializeFormatter)">
+            <summary>Serializes data.</summary>
+            <param name="formatter">The ISerializeFormatter for serialization.</param>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SnapshotSource.Version">
+            <summary>Gets the current serialized version number of the snapshot.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SourceControlDataSource">
+            <summary>A link to a SQL Source Control database</summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.SourceControlDataSource.Description">
+            <summary>
+            The source control repository description, will try the following in order 1) Get description from
+            scriptFolderLocation. 2) If no location, try to fall back on the deserialized description 3) If theres no
+            serialized description (eg from old SIP generated projects) it'll fall back to the servername
+            </summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.SourceControlDataSource.FixupAfterDeserialization(RedGate.SQLCompare.Engine.Migrations.ISOCCompareLocationProvider)">
+            <summary>uses the SQL Source Control Client to resolve the location xml fragments</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SqlOptions">
+            <summary>Options used when synchronizing databases.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.Default">
+            <summary>
+                <para>The default options when synchronizing databases. These are:</para>
+                <list type="bullet">
+                    <item>DisableKeys</item>
+                    <item>OutputCommentHeader</item>
+                    <item>UseTransactions</item>
+                    <item>OutputComments</item>
+                </list>
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.None">
+            <summary>None.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DisableTriggers">
+            <summary>
+            Disable, then re-enable, DML triggers on tables and views in the synchronization script.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DisableKeys">
+            <summary>
+            Disable, then re-enable, foreign keys in the synchronization script. Note that in some circumstances foreign
+            keys are dropped and recreated rather than disabled and re-enabled.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DropConstraintsAndIndexes">
+            <summary>
+            Drop and recreate primary keys, indexes, and unique constraints in the synchronization script. If the primary
+            key, index, or unique constraint is the comparison key, it cannot be dropped.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.OutputCommentHeader">
+            <summary>
+            Include the comment header in the synchronization script. The comment header contains information about the
+            databases that you are comparing, and the version of SQL Data Compare.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DontUseTransactions">
+            <summary>
+            Inserts BEGIN TRANSACTION at the beginning of the synchronization script and COMMIT TRANSACTION at the end of
+            the synchronization script.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.TransportCLRBinary">
+            <summary>
+            In the synchronization script, SQL Data Compare can use the binary representation or the string
+            representation (.ToString()) of the CLR column. Setting this option forces SQL Data Compare to use the binary
+            representation in the synchronization script. The binary representations of the CLR columns must be the same.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DDLTriggerDisable">
+            <summary>Disable and then re-enable all DDL triggers in the synchronization script.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.DontOutputComments">
+            <summary>
+            Include the comments in the output script. The comments make it easier to locate items in the output.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.ReseedIdentity">
+            <summary>
+            Reseeds identity columns so that identity values in the database you are updating match values in the source
+            database.
+            </summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SqlOptions.SkipFkChecks">
+            <summary>
+            Uses WITH NOCHECK to skip integrity checks. If you select this option:
+             - deployments may run faster
+             - foreign keys will be left in a &apos;not trusted&apos; state.
+             </summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.SynchronizationDirection">
+            <summary>The direction of migration for synchronization.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SynchronizationDirection.From1To2">
+            <summary>SQL scripts will migrate any changes in DataSource1 to DataSource2.</summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.SynchronizationDirection.From2To1">
+            <summary>SQL scripts will migrate any changes in DataSource2 to DataSource1.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.TablePairReference">
+            <summary>A reference to a table pair</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.TablePairReference.Table1">
+            <summary>The qualified name of the first table</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.TablePairReference.Table2">
+            <summary>The qualified name of the second table</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.TablePairReference.#ctor(System.String,System.String)">
+            <summary>Creates a new table pair reference</summary>
+            <param name="one">the name of the first table</param>
+            <param name="two">the name of the second table</param>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UberProjectOldDataCompare.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UberProjectOldSqlCompare.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.UserAction">
+            <summary>An enum stating what action the user made.</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.None">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.SelectAll">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.SelectItem">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.DeselectAll">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.DeselectItem">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.DeselectGroup">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.SelectGroup">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.MapOwners">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.UnmapOwners">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.SelectObjectType">
+            <summary></summary>
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.UserAction.DeselectObjectType">
+            <summary></summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.UserActionItem">
+            <summary>Contains the action and associated data.</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UserActionItem.#ctor(RedGate.SQLCompare.Engine.UserAction,System.Object)">
+            <summary></summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UserActionItem.Version">
+            <summary></summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UserActionItem.Action">
+            <summary></summary>
+        </member>
+        <member name="P:RedGate.SQLCompare.Engine.UserActionItem.Data">
+            <summary></summary>
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.UserActionUtilities">
+            <summary>Various utilities for use with user actions</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UserActionUtilities.GetFQN(System.String,System.String)">
+            <summary>Returns a unique name for a pair of strings.</summary>
+            <param name="one">The object name in the first database</param>
+            <param name="two">The object name in the second database</param>
+            <returns>a unique name</returns>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UserActionUtilities.GetTableMappingFQN(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.ViewTableSuperClass})">
+            <summary>
+            Returns a unique name for a mapping, this is NOT the same as the unique name used for TableDifferences
+            </summary>
+            <param name="t">The table mapping</param>
+            <returns>a unique name</returns>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UserActionUtilities.GetFieldMappingFQN(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.IField})">
+            <summary>Returns a unique name for a field mapping.</summary>
+            <param name="fm">The field mapping</param>
+            <returns>A deterministically unique name</returns>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.UserActionUtilities.GetKeyFQN(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.RelationalIndex})">
+            <summary>Returns a unique name for an index mapping.</summary>
+            <param name="im">The index mapping</param>
+            <returns>A deterministically unique name</returns>
+            <exclude />
+        </member>
+        <member name="T:RedGate.SQLCompare.Engine.WhereClauseReference">
+            <summary>A reference to a where clause</summary>
+            <exclude />
+            <excludetoc />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.WhereClauseReference.TableName">
+            <summary>The table name to which the where clause applies</summary>
+            <exclude />
+        </member>
+        <member name="F:RedGate.SQLCompare.Engine.WhereClauseReference.WhereClause">
+            <summary>The text of the where clause</summary>
+            <exclude />
+        </member>
+        <member name="M:RedGate.SQLCompare.Engine.WhereClauseReference.#ctor(RedGate.SQLCompare.Engine.Mapping{RedGate.SQLCompare.Engine.ViewTableSuperClass},System.String)">
+            <summary>Creates a new where clause reference</summary>
+            <param name="tm">The table mapping</param>
+            <param name="clause">The string of the where clause</param>
+            <exclude />
+        </member>
+    </members>
+</doc>

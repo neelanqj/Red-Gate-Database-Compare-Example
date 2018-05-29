@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RedGate.BackupReaderInterfaces</name>
+    </assembly>
+    <members>
+        <member name="T:RedGate.BackupReaderInterfaces.BackupSqlType">
+            This enum was generated programmatically using the following T-SQL in SQL 2005:
+             select 'sql' + upper (substring (name, 1, 1)) + substring(name, 2, len(name)-1) + 
+             ' = ' + convert (varchar(10), xtype) + ',' from systypes order by xtype
+            
+            (and then unknown added as well)
+            A list of all the types exposed by SQL Server
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.BackupSqlTypeHelper">
+            <summary>
+            Types Helper
+            </summary>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.BackupSqlTypeHelper.BackupSqlTypeToType(RedGate.BackupReaderInterfaces.BackupSqlType)">
+            <summary>
+            Convert BackupSqlType to a C# Type
+            </summary>
+            <param name="sqlType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.BackupSqlTypeHelper.BackupSqlTypeToString(RedGate.BackupReaderInterfaces.BackupSqlType)">
+            <summary>
+            Get string rep of BackupSqlType
+            </summary>
+            <param name="sqlType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.BackupType">
+            <summary>
+            The backup type - full, differential etc.
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.Other">
+            <summary>
+            Unknown or other type
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.Full">
+            <summary>
+            Full backup
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.Differential">
+            <summary>
+            Differential backup
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.Log">
+            <summary>
+            Transaction log backup
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.Partial">
+            <summary>
+            Partial backup
+            </summary>
+        </member>
+        <member name="F:RedGate.BackupReaderInterfaces.BackupType.FileGroup">
+            <summary>
+            File / filegroup backup
+            </summary>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.BackupReaderConstants">
+            <summary>
+            A class to hold constants that need to be visible to
+            both SQL Compare, Data Compare and Backup Reader
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.BackupReaderConstants.DatabasePropertiesTableName">
+            <summary>
+            The name of the Properties Table - exposing things like Collation
+            to BackupReader consumers.
+            </summary>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.IBackupConnection">
+            <summary>
+            A base interface for Backup Connections
+            </summary>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.PopulateAdditionalSystemTables(System.Collections.Generic.List{RedGate.BackupReaderInterfaces.ITableName})">
+            <summary>
+            Populate System Tables not populated by the BackupConnection by default
+            </summary>
+            <param name="tables">List of extra tables to populate</param>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.PopulateAdditionalSystemTables(RedGate.BackupReaderInterfaces.ITableName[])">
+            <summary>
+            Populate System Tables not populated by the BackupConnection by default
+            </summary>
+            <param name="tables">List of extra tables to populate</param>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.IsPasswordRequired">
+            <summary>
+            Whether a password is required
+            </summary>
+            <returns>True if required, false otherwise</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.GetBackupSets">
+            <summary>
+            Get the list of BackupSets linked to the connection.
+            </summary>
+            <returns>List of BackupSets</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.UseBackupSet(RedGate.BackupReaderInterfaces.IBackupSet)">
+            <summary>
+            Select the BackupSet to use in the connection.
+            </summary>
+            <param name="backupSet">The BackupSet to use</param>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.CurrentBackupSet">
+            <summary>
+            The current backup set being used.
+            </summary>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.CreateSysTableCommand">
+            <summary>
+            Generate a command to run against the Backup Reader's system table store.
+            </summary>
+            <returns>The IDbCommand for execution against the system table store</returns>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.SQLServerInternalVersionNumber">
+            <summary>
+            SQL Server implementation dependent version number
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.Version">
+            <summary>
+            The external version number (e.g. 10 for SS2008)
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.CompatibilityVersion">
+            <summary>
+            Compatibility version number
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.DatabaseGuid">
+            <summary>
+            Database GUID (syscomments for SS2000 requires this)
+            </summary>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupConnection.OpenForMetaInformation">
+            <summary>
+            A quick open that just populates the meta information 
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupConnection.BackupTemporaryDirectory">
+            <summary>
+            All Backup Temp files will be placed in this directory - due to handle persistance in 
+            the UI the UI can delete this directory on shutdown to eliminate all Backup Files
+            </summary>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.IBackupDataReader">
+            <summary>
+            BackupFile data reader interface
+            </summary>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlBoolean(System.Int32)">
+            <summary>
+            Gets the SqlBoolean value of the specified field
+            </summary>
+            <param name="i">The zero-based column ordinal</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlByte(System.Int32)">
+            <summary>
+            Gets the 8-bit unsigned integer value of the specified column
+            </summary>
+            <param name="i">The zero-based column ordinal</param>
+            <returns>The 8-bit unsigned integer value of the specified column</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlBytes(System.Int32)">
+            <summary>
+            Returns an array of bytes corresponding to the contents of the specified field
+            </summary>
+            <param name="i">The zero-based column ordinal</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlBinary(System.Int32)">
+            <summary>
+            Returns a SqlBinary corresponding to the contents of the specified field
+            </summary>
+            <param name="i">The zero-based column ordinal</param>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlChars(System.Int32)">
+            <summary>
+            Gets a SqlChars object representing the string value of the column
+            </summary>
+            <param name="i">Zero-based column ordinal</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDateTime(System.Int32)">
+            <summary>
+            Gets the date and time data value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The date and time data value of the spcified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDecimal(System.Int32)">
+            <summary>
+            Gets the fixed-position numeric value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The fixed-position numeric value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDouble(System.Int32)">
+            <summary>
+            Gets the double-precision floating point number of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The double-precision floating point number of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlSingle(System.Int32)">
+            <summary>
+            Gets the single-precision floating point number of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The single-precision floating point number of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlGuid(System.Int32)">
+            <summary>
+            Returns the GUID value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The GUID value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlInt16(System.Int32)">
+            <summary>
+            Gets the 16-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 16-bit signed integer value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlInt32(System.Int32)">
+            <summary>
+            Gets the 32-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 32-bit signed integer value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlInt64(System.Int32)">
+            <summary>
+            Gets the 64-bit signed integer value of the specified field.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The 64-bit signed integer value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlMoney(System.Int32)">
+            <summary>
+            Gets the SqlMoney value of the specified field
+            </summary>
+            <param name="i">The zero-based index of the field to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlString(System.Int32)">
+            <summary>
+            Gets the string value of the specified field.
+            
+            This also works for XML fields (SQL 2005), where the original XML string is returned.
+            </summary>
+            <param name="i">The index of the field to find.</param>
+            <returns>The string value of the specified field.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlXml(System.Int32)">
+            <summary>
+            Gets the XML value of the specified field.
+            
+            Note: MSXML doesn't preserve newlines correctly - the original XML uses LF as newline,
+            but the result of SqlXml.Value uses CRLF instead. This causes SQL Data Compare to consider
+            them different, and hence this method should not be used where this is important.
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlVariant(System.Int32)">
+            <summary>
+            Gets the SqlVariant value of the specified field
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlTime(System.Int32)">
+            <summary>
+            Gets a string representation of the Sql Server 2008 SqlTime object
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDate(System.Int32)">
+            <summary>
+            Gets a string representation of the Sql Server 2008 SqlDate object
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDateTime2(System.Int32)">
+            <summary>
+            Gets a string representation of the Sql Server 2008 SqlDateTime2 object
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetSqlDateTimeOffset(System.Int32)">
+            <summary>
+            Gets a string representation of the Sql Server 2008 SqlDateTimeOffset object
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns></returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.GetDataStream(System.Int32)">
+            <summary>
+            Gets a stream for the field specified. The stream is not necessarily seekable, but does
+            allow memory-efficient access to large BLOBs, as fragments are only read in as required.
+            </summary>
+            <param name="i">Zero-based index of the field</param>
+            <returns>A Stream corresponding to the raw data of the field requested, or null.</returns>
+        </member>
+        <member name="M:RedGate.BackupReaderInterfaces.IBackupDataReader.CollationNameFromId(System.Int32)">
+            <summary>
+            Get the string version of the collation
+            </summary>
+            <param name="id">collation id</param>
+            <returns>collation</returns>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.IBackupSet">
+            <summary>
+            A base interface for a BackupSet
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.Encrypted">
+            <summary>
+            Whether the Backup is Encrypted
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.DatabaseName">
+            <summary>
+            The Database Name that the backup was made on
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.ServerName">
+            <summary>
+            The Server Name that the backup was made on
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.StartDate">
+            <summary>
+            When the backup was started
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.EndDate">
+            <summary>
+            When the backup was finished
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.Name">
+            <summary>
+            The Name of the BackupSet
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.FirstLsn">
+            <summary>
+            First LogSequenceNumber in the Backup
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.LastLsn">
+            <summary>
+            Last LogSequenceNumber in the Backup
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.BackupType">
+            <summary>
+            The type of backup
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.CanHandle">
+            <summary>
+            Gets whether SQL Backup Reader is able to handle this BackupSet. This should be
+            used by the user interface to determine whether the user is allowed to select
+            this backup set.
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.Size">
+            <summary>
+            Size (in bytes) of this backup
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.IBackupSet.IsIncomplete">
+            <summary>
+            Gets whether the backup set is a complete backup set or not. An 
+            incomplete backupset containing multiple files one or more of which is missing
+            </summary>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.ISqlVariant">
+            <summary>
+            SQLVariant interface
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.BaseType">
+            <summary>
+            Gets the SQL base type associated with this instance
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.BaseTypeName">
+            <summary>
+            Gets the SQL name associated with this instance
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.Version">
+            <summary>
+            Version number - always 1 currently
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.Data">
+            <summary>
+            The buffer of actual data
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.Object">
+            <summary>
+            Gets the object contained within this SqlVariant object
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.Precision">
+            <summary>
+            Precision value for numeric / decimal types
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.Scale">
+            <summary>
+            Scale value for numeric / decimal types
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.MaxLength">
+            <summary>
+            Maximum permissible length for string and binary types
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ISqlVariant.CollationID">
+            <summary>
+            Collation ID for string types
+            </summary>
+        </member>
+        <member name="T:RedGate.BackupReaderInterfaces.ITableName">
+            <summary>
+            Base interface for TableNames - name + schema
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ITableName.Schema">
+            <summary>
+            Schema Name
+            </summary>
+        </member>
+        <member name="P:RedGate.BackupReaderInterfaces.ITableName.Name">
+            <summary>
+            Object Name
+            </summary>
+        </member>
+    </members>
+</doc>
